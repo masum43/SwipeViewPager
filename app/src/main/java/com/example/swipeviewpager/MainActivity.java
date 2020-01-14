@@ -6,6 +6,9 @@ import androidx.viewpager.widget.ViewPager;
 import android.animation.ArgbEvaluator;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +20,15 @@ public class MainActivity extends AppCompatActivity {
     Integer[] colors = null;
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
     List<Model> models;
+    private String selectedOption;
+    private Button confirmBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        confirmBtn = findViewById(R.id.btnOrder);
 
         models = new ArrayList<>();
         models.add(new Model(R.drawable.brochure,"Brochure","Brochure is an informative"));
@@ -58,6 +65,18 @@ public class MainActivity extends AppCompatActivity {
                                     colors[position+1]
                                     )
                             );
+                    if (position == 0)
+                    {
+                        selectedOption = "Teacher";
+                    }
+                    else if (position ==1)
+                    {
+                        selectedOption = "Student";
+                    }
+                    else if ((position == 2))
+                    {
+                        selectedOption = "Guardian";
+                    }
                 }
                 else {
                     viewPager.setBackgroundColor(colors[colors.length -1]);
@@ -74,5 +93,31 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+        confirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (selectedOption.equals("Teacher"))
+                {
+                    Toast.makeText(MainActivity.this, ""+selectedOption, Toast.LENGTH_LONG).show();
+                }
+
+                else if(selectedOption.equals("Student"))
+                {
+                    Toast.makeText(MainActivity.this, ""+selectedOption, Toast.LENGTH_LONG).show();
+                }
+                else if(selectedOption.equals("Guardian"))
+                {
+                    Toast.makeText(MainActivity.this, ""+selectedOption, Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Null Value : "+selectedOption, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
     }
 }
